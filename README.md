@@ -9,7 +9,7 @@ Please share your use cases, and any other ideas you may have.
 This is work in progress and more resources can be added.
 Play around with the App and let me know your comments.
 
-Happy to conect at:
+Happy to connect at:
 https://www.linkedin.com/in/lopezyse/
 
 Saludos!
