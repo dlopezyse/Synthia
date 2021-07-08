@@ -10,6 +10,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 from gensim.summarization import summarize
 from googletrans import Translator
+import nltk
 from nltk.tokenize import word_tokenize
 import readtime
 import textstat
@@ -168,6 +169,7 @@ if nav == 'Measure text':
             st.error('Please enter a larger text')
         else:
             with st.spinner('Wait for it...'):
+                nltk.download('punkt')
                 rt = readtime.of_text(input_me)
                 tc = textstat.flesch_reading_ease(input_me)
                 tokenized_words = word_tokenize(input_me)
