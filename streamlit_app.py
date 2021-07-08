@@ -2,7 +2,6 @@
 #                   SYNTHIA
 #   The AI system to turn text into knowledge 
 
-
 ##########
 #lIBRARIES
 ##########
@@ -11,6 +10,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 from gensim.summarization import summarize
 from googletrans import Translator
+from nltk.tokenize import word_tokenize
 import readtime
 import textstat
 
@@ -18,8 +18,17 @@ import textstat
 #HEADER
 #######
 
+st.set_page_config(page_title="Synthia")
+
 st.markdown("<h4 style='text-align: center; color:grey;'>Turn text into knowledge</h4>", unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center; color: white;'>Summarize. Translate. Generate. Measure.</h1>", unsafe_allow_html=True)
+st.write('')
+
+"""
+[![Star](https://img.shields.io/github/stars/dlopezyse/Synthia.svg?logo=github&style=social)](https://gitHub.com/dlopezyse/Synthia)
+&nbsp[![Follow](https://img.shields.io/twitter/follow/lopezyse?style=social)](https://www.twitter.com/lopezyse)
+"""
+
 st.markdown('___')
 
 #########
@@ -27,7 +36,7 @@ st.markdown('___')
 ########
 
 st.sidebar.header('I want to:')
-nav = st.sidebar.radio('',['Summarize text', 'Translate text', 'Generate text', 'Measure text complexity'])
+nav = st.sidebar.radio('',['Summarize text', 'Translate text', 'Generate text', 'Measure text'])
 st.sidebar.write('')
 st.sidebar.write('')
 st.sidebar.write('')
@@ -117,7 +126,7 @@ if nav == 'Generate text':
     st.markdown("<h3 style='text-align: left; color:#F63366;'><b>Generate Text<b></h3>", unsafe_allow_html=True)
     st.text('')
 
-    input_ge = st.text_area("Type in some content, and we will create some text based on it (e.g. 'The future of humanity will depend on...')", max_chars=500)
+    input_ge = st.text_area("Type in some content, and we will write something for you", max_chars=500, value="The future of humanity will depend on")
 
     if st.button('Create text'):
         if input_ge =='':
@@ -146,11 +155,11 @@ if nav == 'Generate text':
 #MEASURE
 ########
        
-if nav == 'Measure text complexity':
-    st.markdown("<h3 style='text-align: left; color:#F63366;'><b>Measure Text Complexity<b></h3>", unsafe_allow_html=True)
+if nav == 'Measure text':
+    st.markdown("<h3 style='text-align: left; color:#F63366;'><b>Measure Text<b></h3>", unsafe_allow_html=True)
     st.text('')
 
-    input_me = st.text_area("Write some text in English. Then scroll down to analyze its complexity (minimum = 500 characters)", max_chars=5000)
+    input_me = st.text_area("Write some text in English (minimum = 500 characters). Then scroll down to analyze it", max_chars=5000)
 
     if st.button('Measure'):
         if input_me =='':
@@ -161,10 +170,15 @@ if nav == 'Measure text complexity':
             with st.spinner('Wait for it...'):
                 rt = readtime.of_text(input_me)
                 tc = textstat.flesch_reading_ease(input_me)
+                tokenized_words = word_tokenize(input_me)
+                lr = len(set(tokenized_words)) / len(tokenized_words)
+                lr = round(lr,2)
                 st.text('Reading Time')
                 st.write(rt)
-                st.text('Text Complexity')
+                st.text('Text Complexity (0 = hard to read, 100 = easy to read)')
                 st.write(tc)
+                st.text('Lexical Richness (distinct words over total number of words)')
+                st.write(lr)
 
     st.markdown('___') 
     
