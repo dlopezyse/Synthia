@@ -76,7 +76,7 @@ if nav == 'Summarize text':
 
     components.html(
                         """
-                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="This is SYNTHIA, the AI that turns text into knowledge" data-url="https://www.linkedin.com/in/lopezyse/" data-hashtags="AI,Synthia" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="This is SYNTHIA, the AI that turns text into knowledge" data-url="https://share.streamlit.io/dlopezyse/synthia/main" data-hashtags="AI,Synthia" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                         """,
                         )
 
@@ -113,7 +113,7 @@ if nav == 'Translate text':
     
     components.html(
                         """
-                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="This is SYNTHIA, the AI that turns text into knowledge" data-url="https://www.linkedin.com/in/lopezyse/" data-hashtags="AI,Synthia" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="This is SYNTHIA, the AI that turns text into knowledge" data-url="https://share.streamlit.io/dlopezyse/synthia/main" data-hashtags="AI,Synthia" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                         """,
                         )
 
@@ -146,7 +146,7 @@ if nav == 'Generate text':
     
     components.html(
                         """
-                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="This is SYNTHIA, the AI that turns text into knowledge" data-url="https://www.linkedin.com/in/lopezyse/" data-hashtags="AI,Synthia" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="This is SYNTHIA, the AI that turns text into knowledge" data-url="https://share.streamlit.io/dlopezyse/synthia/main" data-hashtags="AI,Synthia" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                         """,
                         )
         
@@ -184,7 +184,7 @@ if nav == 'Measure text':
     
     components.html(
                         """
-                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="This is SYNTHIA, the AI that turns text into knowledge" data-url="https://www.linkedin.com/in/lopezyse/" data-hashtags="AI,Synthia" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="This is SYNTHIA, the AI that turns text into knowledge" data-url="https://share.streamlit.io/dlopezyse/synthia/main" data-hashtags="AI,Synthia" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                         """,
                         )
 
