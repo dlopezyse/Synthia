@@ -1,5 +1,5 @@
 # Synthia
-### The AI system to turn text into knowledge :robot:
+### The AI system to turn words into knowledge :robot:
 
 This project is based on the idea that AI can be used to accelerate our education :rocket:.
 NLP techniques like text generation, content summarization, automatic machine translation, 
