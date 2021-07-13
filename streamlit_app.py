@@ -1,6 +1,6 @@
 
 #                   SYNTHIA
-#   The AI system to turn text into knowledge 
+#   The AI system to turn words into knowledge 
 
 ##########
 #lIBRARIES
@@ -21,8 +21,8 @@ import textstat
 
 st.set_page_config(page_title="Synthia")
 
-st.markdown("<h4 style='text-align: center; color:grey;'>Turn text into knowledge</h4>", unsafe_allow_html=True)
-st.markdown("<h1 style='text-align: center; color: white;'>Summarize. Translate. Generate. Measure.</h1>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center; color:grey;'>Turn words into knowledge</h4>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: white;'>Generate. Summarize. Paraphrase. Measure.</h1>", unsafe_allow_html=True)
 st.write('')
 
 """
@@ -36,8 +36,8 @@ st.markdown('___')
 #SIDEBAR
 ########
 
-st.sidebar.header('I want to:')
-nav = st.sidebar.radio('',['Summarize text', 'Translate text', 'Generate text', 'Measure text'])
+st.sidebar.header('I want to :bulb:')
+nav = st.sidebar.radio('',['Generate text', 'Summarize text', 'Paraphrase text', 'Measure text'])
 st.sidebar.write('')
 st.sidebar.write('')
 st.sidebar.write('')
@@ -49,11 +49,44 @@ st.sidebar.write('')
 #ABOUT
 ######
 expander = st.sidebar.beta_expander('About')
-expander.write("Learning happens best when content is personalized to meet our needs and strengths. For this reason I created SYNTHIA, the AI system to accelerate and design your knowledge. Interested? This site is just a demo of several other available functionalities. Want to learn more? [Let's connect!] (https://www.linkedin.com/in/lopezyse/)")
+expander.write("Learning happens best when content is personalized to meet our needs and strengths. For this reason I created SYNTHIA :robot_face:, the AI system to accelerate and design your knowledge in seconds. This site is only a demo of several other available functionalities. Want to learn more? [Let's connect!] (https://www.linkedin.com/in/lopezyse/) :point_left:")
 
 #######
 #PAGES
 ######
+
+#GENERATE
+#########
+
+if nav == 'Generate text':
+    st.markdown("<h3 style='text-align: left; color:#F63366;'><b>Generate Text<b></h3>", unsafe_allow_html=True)
+    st.text('')
+
+    input_ge = st.text_area("Type in some words, and we will create something for you", max_chars=500, value="The future of humanity will depend on")
+
+    if st.button('Create text'):
+        if input_ge =='':
+            st.error('Please enter some words')
+        else:
+            with st.spinner('Wait for it...'):
+                result = input_ge.title()
+                from transformers import GPT2LMHeadModel, GPT2Tokenizer
+                tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+                model = GPT2LMHeadModel.from_pretrained('gpt2')
+                inputs = tokenizer.encode(result, return_tensors='pt')
+                outputs = model.generate(inputs, max_length=200, do_sample=True)
+                text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+                st.write(text)
+
+    st.markdown('___') 
+    
+    components.html(
+                        """
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="This is SYNTHIA, the AI that turns words into knowledge" data-url="https://share.streamlit.io/dlopezyse/synthia/main" data-hashtags="AI,Education,MachineLearning,Synthia" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        """,
+                        )
+        
+#-----------------------------------------
 
 #SUMMARIZE
 ##########
@@ -77,82 +110,42 @@ if nav == 'Summarize text':
 
     components.html(
                         """
-                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="This is SYNTHIA, the AI that turns text into knowledge" data-url="https://share.streamlit.io/dlopezyse/synthia/main" data-hashtags="AI,Synthia" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="This is SYNTHIA, the AI that turns words into knowledge" data-url="https://share.streamlit.io/dlopezyse/synthia/main" data-hashtags="AI,Education,MachineLearning,Synthia" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                         """,
                         )
 
 #-----------------------------------------
 
-#TRANSLATE
-##########
+#PARAPHRASE
+###########
 
-if nav == 'Translate text':
-    st.markdown("<h3 style='text-align: left; color:#F63366;'><b>Translate Text<b></h3>", unsafe_allow_html=True)
+if nav == 'Paraphrase text':
+    st.markdown("<h3 style='text-align: left; color:#F63366;'><b>Paraphrase Text<b></h3>", unsafe_allow_html=True)
     st.text('')
     
-    translator = Translator()
-             
-    input_tr = st.text_area("Write some text in English. Then scroll down to translate", max_chars=5000)
+    input_pa = st.text_area("Write some text or copy & paste so we can paraphrase it", max_chars=5000)
 
-    languages = ['','Spanish', 'French', 'Deutsch']
-    options = st.selectbox('Please select a language for translation', languages)
-
-    if options =='Spanish':
-        with st.spinner('Traduciendo...'):
-            trans1 = translator.translate(input_tr, dest="es").text
-            st.write(trans1)
-    elif options =='French':
-        with st.spinner('Traduire...'):
-            trans2 = translator.translate(input_tr, dest='fr').text
-            st.write(trans2)   
-    elif options =='Deutsch':
-        with st.spinner('Übersetzen...'):
-            trans3 = translator.translate(input_tr, dest='de').text
-            st.write(trans3)
- 
-    st.markdown('___') 
-    
-    components.html(
-                        """
-                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="This is SYNTHIA, the AI that turns text into knowledge" data-url="https://share.streamlit.io/dlopezyse/synthia/main" data-hashtags="AI,Synthia" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                        """,
-                        )
-
-#-----------------------------------------
-    
-#GENERATE
-#########
-
-if nav == 'Generate text':
-    st.markdown("<h3 style='text-align: left; color:#F63366;'><b>Generate Text<b></h3>", unsafe_allow_html=True)
-    st.text('')
-
-    input_ge = st.text_area("Type in some content, and we will write something for you", max_chars=500, value="The future of humanity will depend on")
-
-    if st.button('Create text'):
-        if input_ge =='':
-            st.error('Please enter a search term')
+    if st.button('Paraphrase'):
+        if input_pa =='':
+            st.error('Please enter some text')
         else:
             with st.spinner('Wait for it...'):
-                result = input_ge.title()
-                from transformers import GPT2LMHeadModel, GPT2Tokenizer
-                tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-                model = GPT2LMHeadModel.from_pretrained('gpt2')
-                inputs = tokenizer.encode(result, return_tensors='pt')
-                outputs = model.generate(inputs, max_length=200, do_sample=True)
-                text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-                st.write(text)
+                translator = Translator()
+                mid = translator.translate(input_pa, dest="fr").text
+                mid2 = translator.translate(mid, dest="de").text
+                back = translator.translate(mid2, dest="en").text
+                st.write(back)
 
-    st.markdown('___') 
-    
+    st.markdown('___')
+
     components.html(
                         """
-                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="This is SYNTHIA, the AI that turns text into knowledge" data-url="https://share.streamlit.io/dlopezyse/synthia/main" data-hashtags="AI,Synthia" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="This is SYNTHIA, the AI that turns words into knowledge" data-url="https://share.streamlit.io/dlopezyse/synthia/main" data-hashtags="AI,Education,MachineLearning,Synthia" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                         """,
                         )
-        
+
 #-----------------------------------------
-     
+   
 #MEASURE
 ########
        
@@ -160,7 +153,7 @@ if nav == 'Measure text':
     st.markdown("<h3 style='text-align: left; color:#F63366;'><b>Measure Text<b></h3>", unsafe_allow_html=True)
     st.text('')
 
-    input_me = st.text_area("Write some text in English (minimum = 500 characters). Then scroll down to analyze it", max_chars=5000)
+    input_me = st.text_area("Input some text in English, and scroll down to analyze it", max_chars=5000)
 
     if st.button('Measure'):
         if input_me =='':
@@ -177,7 +170,7 @@ if nav == 'Measure text':
                 lr = round(lr,2)
                 st.text('Reading Time')
                 st.write(rt)
-                st.text('Text Complexity (0 = hard to read, 100 = easy to read)')
+                st.text('Text Complexity (score from 0 (hard to read), to 100 (easy to read))')
                 st.write(tc)
                 st.text('Lexical Richness (distinct words over total number of words)')
                 st.write(lr)
@@ -186,7 +179,7 @@ if nav == 'Measure text':
     
     components.html(
                         """
-                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="This is SYNTHIA, the AI that turns text into knowledge" data-url="https://share.streamlit.io/dlopezyse/synthia/main" data-hashtags="AI,Synthia" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="This is SYNTHIA, the AI that turns words into knowledge" data-url="https://share.streamlit.io/dlopezyse/synthia/main" data-hashtags="AI,Education,MachineLearning,Synthia" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                         """,
                         )
 
