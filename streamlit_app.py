@@ -48,7 +48,7 @@ st.sidebar.write('')
 
 #ABOUT
 ######
-expander = st.sidebar.beta_expander('About')
+expander = st.sidebar.expander('About')
 expander.write("Learning happens best when content is personalized to meet our needs and strengths. For this reason I created SYNTHIA :robot_face:, the AI system to accelerate and design your knowledge in seconds (this site is only a demo of several other functionalities). I'd love your feedback on this :smiley:, so if you want to reach out you can find me on [LinkedIn] (https://www.linkedin.com/in/lopezyse/) and [Twitter] (https://twitter.com/lopezyse)")
 
 
