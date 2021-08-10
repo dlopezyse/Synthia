@@ -3,7 +3,7 @@
 #   The AI system to turn words into knowledge 
 
 ##########
-#lIBRARIES
+#LIBRARIES
 ##########
 
 import streamlit as st
@@ -22,7 +22,7 @@ import textstat
 st.set_page_config(page_title="Synthia")
 
 st.markdown("<h4 style='text-align: center; color:grey;'>Turn words into knowledge</h4>", unsafe_allow_html=True)
-st.markdown("<h1 style='text-align: center; color: white;'>Generate. Summarize. Paraphrase. Measure.</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: white;'>Summarize. Paraphrase. Measure.</h1>", unsafe_allow_html=True)
 st.write('')
 
 """
@@ -39,7 +39,7 @@ st.markdown('___')
 ########
 
 st.sidebar.header('I want to :bulb:')
-nav = st.sidebar.radio('',['Generate text', 'Summarize text', 'Paraphrase text', 'Measure text'])
+nav = st.sidebar.radio('',['Summarize text', 'Paraphrase text', 'Measure text'])
 st.sidebar.write('')
 st.sidebar.write('')
 st.sidebar.write('')
@@ -55,39 +55,6 @@ expander.write("Learning happens best when content is personalized to meet our n
 #######
 #PAGES
 ######
-
-#GENERATE
-#########
-
-if nav == 'Generate text':
-    st.markdown("<h3 style='text-align: left; color:#F63366;'><b>Generate Text<b></h3>", unsafe_allow_html=True)
-    st.text('')
-
-    input_ge = st.text_area("Type in some words, and we will create something for you", max_chars=500, value="The future of humanity will depend on")
-
-    if st.button('Create text'):
-        if input_ge =='':
-            st.error('Please enter some words')
-        else:
-            with st.spinner('Wait for it...'):
-                result = input_ge.title()
-                from transformers import GPT2LMHeadModel, GPT2Tokenizer
-                tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-                model = GPT2LMHeadModel.from_pretrained('gpt2')
-                inputs = tokenizer.encode(result, return_tensors='pt')
-                outputs = model.generate(inputs, max_length=200, do_sample=True)
-                text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-                st.write(text)
-
-    st.markdown('___') 
-    
-    components.html(
-                        """
-                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="This is SYNTHIA, the AI that turns words into knowledge via @lopezyse" data-url="https://share.streamlit.io/dlopezyse/synthia/main" data-hashtags="AI,Education,MachineLearning,Synthia" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                        """,
-                        )
-        
-#-----------------------------------------
 
 #SUMMARIZE
 ##########
