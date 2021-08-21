@@ -10,3 +10,6 @@ textstat==0.7.1
 tokenizers==0.10.3
 torch==1.9.0
 transformers==4.8.2
+pydub==0.25.1
+streamlit-webrtc==0.26.0
+deepspeech==0.9.3
