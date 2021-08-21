@@ -21,6 +21,7 @@ import urllib.request
 from collections import deque
 from pathlib import Path
 from typing import List
+from qrcodegen import *
 import av
 import numpy as np
 import pydub
@@ -103,7 +104,7 @@ st.markdown('___')
 ########
 
 st.sidebar.header('I want to :bulb:')
-nav = st.sidebar.radio('',['Summarize text', 'Paraphrase text', 'Measure text', 'Speech to Text'])
+nav = st.sidebar.radio('',['Summarize text', 'Paraphrase text', 'Measure text', 'Speech to Text', 'Text to QRcode'])
 st.sidebar.write('')
 st.sidebar.write('')
 st.sidebar.write('')
@@ -307,6 +308,43 @@ if nav == 'Speech to Text':
 		app_sst(
     		str(MODEL_LOCAL_PATH), str(LANG_MODEL_LOCAL_PATH), lm_alpha, lm_beta, beam
         )
+
+#-----------------------------------------
+   
+#TEXT-TO-QRCODE
+########
+def to_svg_str(qr: QrCode, border: int) -> str:
+    """Returns a string of SVG code for an image depicting the given QR Code, with the given number
+    of border modules. The string always uses Unix newlines (\n), regardless of the platform."""
+    if border < 0:
+        raise ValueError("Border must be non-negative")
+    parts: List[str] = []
+    for y in range(qr.get_size()):
+        for x in range(qr.get_size()):
+            if qr.get_module(x, y):
+                parts.append("M{},{}h1v1h-1z".format(x + border, y + border))
+    return """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 {0} {0}" stroke="none">
+    <rect width="100%" height="100%" fill="#FFFFFF"/>
+    <path d="{1}" fill="#000000"/>
+</svg>
+""".format(qr.get_size() + border * 2, " ".join(parts))
+
+if nav == 'Text to QRcode':
+    st.markdown("<h3 style='text-align: left; color:#F63366;'><b>Text to QRcode<b></h3>", unsafe_allow_html=True)
+    st.text('')
+    
+    input_su = st.text_area("Write some text or copy & paste so we can generate it's QRcode", max_chars=5000)
+    if st.button('Generate QRcode'):
+        if input_su =='':
+            st.error('Please enter some text')
+        else:
+            qr = QrCode.encode_text(input_su, QrCode.Ecc.MEDIUM)
+            st.markdown(str(to_svg_str(qr, 4)), unsafe_allow_html=True)
+
+    st.markdown('___')
+
 
 ####################################
 
