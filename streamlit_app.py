@@ -288,9 +288,9 @@ def app_sst(model_path: str, lm_path: str, lm_alpha: float, lm_beta: float, beam
             break
 
 if nav == 'Speech to Text':
-    st.markdown("<h3 style='text-align: left; color:#F63366;'><b>Speech to Text<b></h3>", unsafe_allow_html=True)
-    st.text('')
-	st.markdown("This demo app is using [DeepSpeech](https://github.com/mozilla/DeepSpeech), an open speech-to-text engine. A pre-trained model released with [v0.9.3](https://github.com/mozilla/DeepSpeech/releases/tag/v0.9.3), trained on American English is being served.")
+	st.markdown("<h3 style='text-align: left; color:#F63366;'><b>Speech to Text<b></h3>", unsafe_allow_html=True)
+	st.text('')
+	st.write("This demo app is using [DeepSpeech](https://github.com/mozilla/DeepSpeech), an open speech-to-text engine. A pre-trained model released with [v0.9.3](https://github.com/mozilla/DeepSpeech/releases/tag/v0.9.3), trained on American English is being served.")
 	MODEL_URL = "https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.pbmm"
 	LANG_MODEL_URL = "https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.scorer"
 	MODEL_LOCAL_PATH = HERE / "models/deepspeech-0.9.3-models.pbmm"
