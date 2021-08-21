@@ -219,6 +219,7 @@ if nav == 'Measure text':
    
 #SPPECH-TO-TEXT
 ########
+
 def app_sst(model_path: str, lm_path: str, lm_alpha: float, lm_beta: float, beam: int):
     webrtc_ctx = webrtc_streamer(
         key="speech-to-text",
@@ -286,8 +287,9 @@ def app_sst(model_path: str, lm_path: str, lm_alpha: float, lm_beta: float, beam
             status_indicator.write("AudioReciver is not set. Abort.")
             break
 
-
 if nav == 'Speech to Text':
+    st.markdown("<h3 style='text-align: left; color:#F63366;'><b>Speech to Text<b></h3>", unsafe_allow_html=True)
+    st.text('')
 	st.markdown("""This demo app is using [DeepSpeech](https://github.com/mozilla/DeepSpeech),
 	an open speech-to-text engine.
 	A pre-trained model released with
