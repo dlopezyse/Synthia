@@ -13,3 +13,4 @@ transformers==4.8.2
 pydub==0.25.1
 streamlit-webrtc==0.26.0
 deepspeech==0.9.3
+qrcodegen==1.7.0
