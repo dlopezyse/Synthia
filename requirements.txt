@@ -8,5 +8,3 @@ textstat==0.7.1
 tokenizers==0.10.3
 sumy==0.8.1
 textattack==0.3.0
-SpeechRecognition==3.8.1
-PyAudio==0.2.11
