@@ -21,6 +21,7 @@ from sumy.summarizers.lex_rank import LexRankSummarizer
 from io import StringIO
 from textattack.augmentation import EmbeddingAugmenter
 from textattack.augmentation import WordNetAugmenter
+import speech_recognition as sr
 
 ###################
 #PAGE CONFIGURATION
@@ -332,12 +333,8 @@ if nav == 'Turn speech into text':
     st.markdown("<h3 style='text-align: left; color:#F63366; font-size:28px;'><b>Turn speech into text<b></h3>", unsafe_allow_html=True)
     st.text('')
     st.text("Press the button below and start speaking. Once you stop, we'll transcribe your speech!")
-
-    import speech_recognition as sr
-       
-    #define the mic (first element in the array)
+ 
     mic = sr.Microphone(device_index=0)
-
     recognizer = sr.Recognizer()
     
     if st.button('Speak now'):
