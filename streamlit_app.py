@@ -21,7 +21,6 @@ from sumy.summarizers.lex_rank import LexRankSummarizer
 from io import StringIO
 from textattack.augmentation import EmbeddingAugmenter
 from textattack.augmentation import WordNetAugmenter
-import speech_recognition as sr
 
 ###################
 #PAGE CONFIGURATION
