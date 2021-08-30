@@ -26,7 +26,11 @@ from textattack.augmentation import WordNetAugmenter
 #PAGE CONFIGURATION
 ###################
 
-st.set_page_config(page_title="SYNTHIA", page_icon=":robot_face:")
+st.set_page_config(page_title="SYNTHIA", 
+                   page_icon=":robot_face:",
+                   layout="wide",
+                   initial_sidebar_state="expanded"
+                   )
 
 #########
 #SIDEBAR
