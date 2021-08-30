@@ -1,6 +1,5 @@
 gensim==3.8.3
 googletrans==3.1.0a0
-huggingface-hub==0.0.12
 nltk==3.6.1
 numpy==1.21.0
 pandas==1.3.0
@@ -8,9 +7,5 @@ readtime==1.1.1
 streamlit==0.86.0
 textstat==0.7.1
 tokenizers==0.10.3
-torch==1.9.0
-transformers==4.8.2
-pydub==0.25.1
-streamlit-webrtc==0.26.0
-deepspeech==0.9.3
-qrcodegen==1.7.0
+sumy==0.8.1
+textattack==0.3.0
