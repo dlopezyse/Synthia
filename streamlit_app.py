@@ -314,7 +314,7 @@ if nav == 'Analyze text':
                         st.text('Reading Time')
                         st.write(rt)
                         st.markdown('___')
-                        st.text('Text Complexity: from 0 (hard to read), to 100 (easy to read)')
+                        st.text('Text Complexity: from 0 or negative (hard to read), to 100 or more (easy to read)')
                         st.write(tc)
                         st.markdown('___')
                         st.text('Lexical Richness (distinct words over total number of words)')
