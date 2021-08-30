@@ -34,7 +34,7 @@ st.set_page_config(page_title="SYNTHIA", page_icon=":robot_face:")
 ########
 
 st.sidebar.header('SYNTHIA, I want to :crystal_ball:')
-nav = st.sidebar.radio('',['Go to homepage', 'Summarize text', 'Paraphrase text', 'Analyze text', 'Turn speech into text'])
+nav = st.sidebar.radio('',['Go to homepage', 'Summarize text', 'Paraphrase text', 'Analyze text'])
 st.sidebar.write('')
 st.sidebar.write('')
 st.sidebar.write('')
@@ -321,33 +321,5 @@ if nav == 'Analyze text':
                         st.text('Lexical Richness (distinct words over total number of words)')
                         st.write(lr)
                         st.balloons()
-
-#-----------------------------------------
-
-#SPEECH TO TEXT
-###############
-     
-if nav == 'Turn speech into text':
-    st.markdown("<h4 style='text-align: center; color:grey;'>Accelerate knowledge with SYNTHIA &#129302;</h4>", unsafe_allow_html=True)
-    st.text('')
-    st.markdown("<h3 style='text-align: left; color:#F63366; font-size:28px;'><b>Turn speech into text<b></h3>", unsafe_allow_html=True)
-    st.text('')
-    st.text("Press the button below and start speaking. Once you stop, we'll transcribe your speech!")
- 
-    mic = sr.Microphone(device_index=0)
-    recognizer = sr.Recognizer()
-    
-    if st.button('Speak now'):
-        with sr.Microphone() as inputs:
-            with st.spinner('Please speak now...'):
-                time.sleep(2)
-                listening = recognizer.listen(inputs)
-                with st.spinner('Processing...'):
-                    time.sleep(2)
-                    try:
-                        st.write("Did you say?:")
-                        st.success(recognizer.recognize_google(listening))
-                    except:
-                        st.error("Sorry, I couldn't get that. Please try again")
 
 #-----------------------------------------
