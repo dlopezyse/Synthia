@@ -1,9 +1,9 @@
-# Synthia
+# SYNTHIA
 ### The AI system to accelerate knowledge :robot:
 
 This project is based on the idea that AI can be used to accelerate our education :rocket:.
-NLP techniques like text generation, content summarization, automatic paraphrasing, 
-and different text metrics can be leveraged to drive a new and modern educational approach.
+NLP techniques like content summarization, automatic paraphrasing, 
+and different text analysis can be leveraged to drive a new and modern educational approach.
 
 #### Find the App here :point_right: [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/dlopezyse/synthia/main) and let me know your comments.
 
