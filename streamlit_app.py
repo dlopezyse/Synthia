@@ -1,4 +1,3 @@
-
 #                   SYNTHIA
 #   The AI system to accelerate knowledge 
 
@@ -22,15 +21,19 @@ from io import StringIO
 from textattack.augmentation import EmbeddingAugmenter
 from textattack.augmentation import WordNetAugmenter
 
-###################
-#PAGE CONFIGURATION
-###################
+
+#############
+#PAGE SET UP
+#############
 
 st.set_page_config(page_title="SYNTHIA", 
                    page_icon=":robot_face:",
                    layout="wide",
                    initial_sidebar_state="expanded"
                    )
+
+def p_title(title):
+    st.markdown(f'<h3 style="text-align: left; color:#F63366; font-size:28px;">{title}</h3>', unsafe_allow_html=True)
 
 #########
 #SIDEBAR
@@ -73,7 +76,7 @@ if nav == 'Go to homepage':
     st.write("Learning happens best when content is personalized to meet our needs and strengths.")
     st.write("For this reason I created SYNTHIA :robot_face:, the AI system to accelerate and design your knowledge in seconds! Use this App to summarize and simplify content. Paste your text or upload your file and you're done. We'll process it for you!")     
     st.markdown("<h3 style='text-align: left; color:#F63366; font-size:18px;'><b>Who is this App for?<b></h3>", unsafe_allow_html=True)
-    st.write("Anyone can use this App completely for free! If you like it, please share it :+1: ")
+    st.write("Anyone can use this App completely for free! If you like it :heart:, show your support by sharing :+1: ")
     st.write("Are you into NLP? Our code is 100% open source and written for easy understanding. Fork it from [GitHub] (https://github.com/dlopezyse/Synthia), and pull any suggestions you may have. Become part of the community! Help yourself and help others :smiley:")
 
 #-----------------------------------------
@@ -81,18 +84,20 @@ if nav == 'Go to homepage':
 #SUMMARIZE
 ##########
 
-if nav == 'Summarize text':
+if nav == 'Summarize text':    
     st.markdown("<h4 style='text-align: center; color:grey;'>Accelerate knowledge with SYNTHIA &#129302;</h4>", unsafe_allow_html=True)
     st.text('')
-    st.markdown("<h3 style='text-align: left; color:#F63366; font-size:28px;'><b>Summarize text<b></h3>", unsafe_allow_html=True)
+    p_title('Summarize')
     st.text('')
 
     source = st.radio("How would you like to start? Choose an option below",
                           ("I want to input some text", "I want to upload a file"))
     st.text('')
+    
+    s_example = "Artificial intelligence (AI) is intelligence demonstrated by machines, as opposed to the natural intelligence displayed by humans or animals. Leading AI textbooks define the field as the study of 'intelligent agents': any system that perceives its environment and takes actions that maximize its chance of achieving its goals. Some popular accounts use the term 'artificial intelligence' to describe machines that mimic cognitive functions that humans associate with the human mind, such as learning and problem solving, however this definition is rejected by major AI researchers. AI applications include advanced web search engines, recommendation systems (used by YouTube, Amazon and Netflix), understanding human speech (such as Siri or Alexa), self-driving cars (such as Tesla), and competing at the highest level in strategic game systems (such as chess and Go). As machines become increasingly capable, tasks considered to require intelligence are often removed from the definition of AI, a phenomenon known as the AI effect. For instance, optical character recognition is frequently excluded from things considered to be AI, having become a routine technology."
 
     if source == 'I want to input some text':
-        input_su = st.text_area("Write or paste your text in English (between 1,000 and 10,000 characters)", max_chars=10000)
+        input_su = st.text_area("Use the example below or input your own text in English (between 1,000 and 10,000 characters)", value=s_example, max_chars=10000, height=330)
         if st.button('Summarize'):
             if len(input_su) < 1000:
                 st.error('Please enter a text in English of minimum 1,000 characters')
@@ -105,6 +110,18 @@ if nav == 'Summarize text':
                     st.write('TextRank Model')
                     st.caption(result_t_r)
                     st.success(t_r) 
+                    my_parser = PlaintextParser.from_string(input_su,Tokenizer('english'))
+                    lex_rank_summarizer = LexRankSummarizer()
+                    lexrank_summary = lex_rank_summarizer(my_parser.document,sentences_count=3)
+                    summa = ''
+                    for sentence in lexrank_summary:
+                            summa = summa + str(sentence)
+                    l_r = summa
+                    result_l_r = (str(len(l_r)) + ' characters' + ' ('"{:.0%}".format(len(l_r)/len(input_su)) + ' of original content)')
+                    st.markdown('___')
+                    st.write('LexRank Model')
+                    st.caption(result_l_r)
+                    st.success(l_r)
                     text = input_su
                     stopWords = set(stopwords.words("english"))
                     words = word_tokenize(text)
@@ -132,7 +149,7 @@ if nav == 'Summarize text':
                     average = int(sumValues / len(sentenceValue))
                     summary = ''
                     for sentence in sentences:
-                        if (sentence in sentenceValue) and (sentenceValue[sentence] > (1.3 * average)):
+                        if (sentence in sentenceValue) and (sentenceValue[sentence] > (1.2 * average)):
                             summary += " " + sentence
                     s_m = summary
                     result_s_m = (str(len(s_m)) + ' characters' + ' ('"{:.0%}".format(len(s_m)/len(input_su)) + ' of original content)')
@@ -140,18 +157,6 @@ if nav == 'Summarize text':
                     st.write('Scoring Model')
                     st.caption(result_s_m)
                     st.success(s_m)
-                    my_parser = PlaintextParser.from_string(input_su,Tokenizer('english'))
-                    lex_rank_summarizer = LexRankSummarizer()
-                    lexrank_summary = lex_rank_summarizer(my_parser.document,sentences_count=3)
-                    summa = ''
-                    for sentence in lexrank_summary:
-                            summa = summa + str(sentence)
-                    l_r = summa
-                    result_l_r = (str(len(l_r)) + ' characters' + ' ('"{:.0%}".format(len(l_r)/len(input_su)) + ' of original content)')
-                    st.markdown('___')
-                    st.write('LexRank Model')
-                    st.caption(result_l_r)
-                    st.success(l_r)
                     st.balloons()
 
     if source == 'I want to upload a file':
@@ -182,7 +187,6 @@ if nav == 'Summarize text':
                                 freqTable[word] += 1
                             else:
                                 freqTable[word] = 1
-                        # Creating a dictionary to keep the score of each sentence
                         sentences = sent_tokenize(text)
                         sentenceValue = dict()
                         for sentence in sentences:
@@ -228,10 +232,12 @@ if nav == 'Summarize text':
 if nav == 'Paraphrase text':
     st.markdown("<h4 style='text-align: center; color:grey;'>Accelerate knowledge with SYNTHIA &#129302;</h4>", unsafe_allow_html=True)
     st.text('')
-    st.markdown("<h3 style='text-align: left; color:#F63366; font-size:28px;'><b>Paraphrase text<b></h3>", unsafe_allow_html=True)
+    p_title('Paraphrase')
     st.text('')
     
-    input_pa = st.text_area("Write or paste your text in English (maximum 500 characters)", max_chars=500)
+    p_example = 'Health is the level of functional or metabolic efficiency of a living organism. In humans, it is the ability of individuals or communities to adapt and self-manage when facing physical, mental, or social challenges. The most widely accepted definition of good health is that of the World Health Organization Constitution.'
+   
+    input_pa = st.text_area("Use the example below or input your own text in English (maximum 500 characters)", max_chars=500, value=p_example, height=160)
 
     if st.button('Paraphrase'):
         if input_pa =='':
@@ -266,15 +272,17 @@ if nav == 'Paraphrase text':
 if nav == 'Analyze text':
     st.markdown("<h4 style='text-align: center; color:grey;'>Accelerate knowledge with SYNTHIA &#129302;</h4>", unsafe_allow_html=True)
     st.text('')
-    st.markdown("<h3 style='text-align: left; color:#F63366; font-size:28px;'><b>Analyze text<b></h3>", unsafe_allow_html=True)
+    p_title('Analyze text')
     st.text('')
     
+    a_example = "Artificial intelligence (AI) is intelligence demonstrated by machines, as opposed to the natural intelligence displayed by humans or animals. Leading AI textbooks define the field as the study of 'intelligent agents': any system that perceives its environment and takes actions that maximize its chance of achieving its goals. Some popular accounts use the term 'artificial intelligence' to describe machines that mimic cognitive functions that humans associate with the human mind, such as learning and problem solving, however this definition is rejected by major AI researchers. AI applications include advanced web search engines, recommendation systems (used by YouTube, Amazon and Netflix), understanding human speech (such as Siri or Alexa), self-driving cars (such as Tesla), and competing at the highest level in strategic game systems (such as chess and Go). As machines become increasingly capable, tasks considered to require intelligence are often removed from the definition of AI, a phenomenon known as the AI effect. For instance, optical character recognition is frequently excluded from things considered to be AI, having become a routine technology."
+
     source = st.radio("How would you like to start? Choose an option below",
                           ("I want to input some text", "I want to upload a file"))
     st.text('')
 
     if source == 'I want to input some text':
-        input_me = st.text_area("Write or paste your text in English (maximum of 10,000 characters)", max_chars=10000)
+        input_me = st.text_area("Use the example below or input your own text in English (maximum of 10,000 characters)", max_chars=10000, value=a_example, height=330)
         if st.button('Analyze'):
             if len(input_me) > 10000:
                 st.error('Please enter a text in English of maximum 1,000 characters')
@@ -287,6 +295,7 @@ if nav == 'Analyze text':
                     tokenized_words = word_tokenize(input_me)
                     lr = len(set(tokenized_words)) / len(tokenized_words)
                     lr = round(lr,2)
+                    n_s = textstat.sentence_count(input_me)
                     st.markdown('___')
                     st.text('Reading Time')
                     st.write(rt)
@@ -296,6 +305,9 @@ if nav == 'Analyze text':
                     st.markdown('___')
                     st.text('Lexical Richness (distinct words over total number of words)')
                     st.write(lr)
+                    st.markdown('___')
+                    st.text('Number of sentences')
+                    st.write(n_s)
                     st.balloons()
 
     if source == 'I want to upload a file':
@@ -314,6 +326,7 @@ if nav == 'Analyze text':
                         tokenized_words = word_tokenize(string_data)
                         lr = len(set(tokenized_words)) / len(tokenized_words)
                         lr = round(lr,2)
+                        n_s = textstat.sentence_count(string_data)
                         st.markdown('___')
                         st.text('Reading Time')
                         st.write(rt)
@@ -323,6 +336,9 @@ if nav == 'Analyze text':
                         st.markdown('___')
                         st.text('Lexical Richness (distinct words over total number of words)')
                         st.write(lr)
+                        st.markdown('___')
+                        st.text('Number of sentences')
+                        st.write(n_s)
                         st.balloons()
 
 #-----------------------------------------
