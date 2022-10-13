@@ -5,7 +5,7 @@ This project is based on the idea that AI can be used to accelerate our educatio
 NLP techniques like content summarization, automatic paraphrasing, 
 and different text analysis can be leveraged to drive a new and modern educational approach.
 
-#### Find the App here :point_right: [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/dlopezyse/synthia/main) and let me know your comments.
+#### Find the App here :point_right: [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://synthia.streamlitapp.com/) and let me know your comments.
 
 ![synthia-demo](https://user-images.githubusercontent.com/40613836/124684289-26642700-dea5-11eb-99cf-afca7ce8ac1f.gif)
 
