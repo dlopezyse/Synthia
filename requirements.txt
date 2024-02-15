@@ -3,7 +3,7 @@ googletrans==3.1.0a0
 nltk==3.6.1
 pandas==1.3.0
 readtime==1.1.1
-streamlit==0.86.0
+streamlit==1.25.0
 textstat==0.7.1
 tokenizers==0.10.3
 sumy==0.8.1
