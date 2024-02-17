@@ -18,8 +18,8 @@ from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.lex_rank import LexRankSummarizer
 from io import StringIO
-from textattack.augmentation import EmbeddingAugmenter
-from textattack.augmentation import WordNetAugmenter
+#from textattack.augmentation import EmbeddingAugmenter
+#from textattack.augmentation import WordNetAugmenter
 
 
 #############
@@ -252,16 +252,16 @@ if nav == 'Paraphrase text':
                     st.markdown('___')
                     st.write('Back Translation Model')
                     st.success(back)
-                    e_augmenter = EmbeddingAugmenter(transformations_per_example=1, pct_words_to_swap=0.3)
-                    e_a = e_augmenter.augment(input_pa)
-                    st.markdown('___')
-                    st.write('Embedding Augmenter Model')
-                    st.success(e_a)
-                    w_augmenter = WordNetAugmenter(transformations_per_example=1, pct_words_to_swap=0.3)
-                    w_a = w_augmenter.augment(input_pa)
-                    st.markdown('___')
-                    st.write('WordNet Augmenter Model')
-                    st.success(w_a)
+                    # e_augmenter = EmbeddingAugmenter(transformations_per_example=1, pct_words_to_swap=0.3)
+                    # e_a = e_augmenter.augment(input_pa)
+                    # st.markdown('___')
+                    # st.write('Embedding Augmenter Model')
+                    # st.success(e_a)
+                    # w_augmenter = WordNetAugmenter(transformations_per_example=1, pct_words_to_swap=0.3)
+                    # w_a = w_augmenter.augment(input_pa)
+                    # st.markdown('___')
+                    # st.write('WordNet Augmenter Model')
+                    # st.success(w_a)
                     st.balloons()
 
 #-----------------------------------------
