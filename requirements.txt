@@ -7,4 +7,4 @@ streamlit==0.86.0
 textstat==0.7.1
 tokenizers==0.10.3
 sumy==0.8.1
-numpy==1.22.4
+numpy==1.16.1
