@@ -6,3 +6,5 @@ readtime
 textstat
 sumy
 textattack
+numpy==1.19.5
+scipy==1.5.4
